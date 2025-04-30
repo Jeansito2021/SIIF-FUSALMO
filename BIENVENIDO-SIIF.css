@@ -1,0 +1,133 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1F376F;
+  padding: 1rem;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.logo-navbar img {
+  height: 50px;
+  transition: transform 0.3s ease;
+}
+
+.logo-navbar img:hover {
+  transform: scale(1.1);
+}
+
+/* CONTENIDO PRINCIPAL */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 6rem;
+  padding: 1rem;
+}
+
+/* IMÁGENES */
+.image-pair-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.img-left,
+.img-right {
+  max-width: 510px;
+  height: auto;
+  object-fit: contain;
+  flex: 0 1 auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.img-left:hover,
+.img-right:hover {
+  transform: scale(1.05);
+}
+
+/* BOTÓN */
+.access-button {
+  margin: 1rem 0 3rem;
+}
+
+.access-button button {
+  background-color: #1F376F;
+  border: none;
+  color: white;
+  padding: 0.9rem 1.5rem; 
+  border-radius: 50px;
+  font-size: 1rem; 
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.access-button button:hover {
+  background-color: #2d4ea7;
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.access-button button:active {
+  transform: scale(1.03);
+}
+
+.access-button button i {
+  margin-right: 0.5rem;
+  font-size: 1.2rem; /* más pequeño */
+  color: #fff;
+}
+
+/* FOOTER */
+.footer-container {
+  background-color: #1F376F;
+  padding: 1rem 0;
+  width: 100%;
+  text-align: center;
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .image-pair-container {
+    flex-direction: column;
+  }
+
+  .img-left,
+  .img-right {
+    width: 80%;
+  }
+
+  .access-button button {
+    width: 90%;
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+  }
+}
