@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Perfil de Usuario</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+  <style>
+
+    .perfil-nombre {
+      background-color: #4d6dff;
+      color: white;
+      padding: 0.5rem 2rem;
+      border-radius: 50px;
+      display: inline-block;
+    }
+
+    .btn-custom {
+      background-color: #4d6dff;
+      color: white;
+      border-radius: 25px;
+      padding: 0.3rem 1rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-custom:hover {
+      background-color: #3b55cc;
+      color: white;
+    }
+
+    .info-row {
+      background-color: #4d6dff;
+      color: white;
+      padding: 1.5rem 1rem;
+      border-radius: 10px;
+    }
+
+    .info-icon {
+      font-size: 1.3rem;
+      margin-right: 0.5rem;
+    }
+
+    .info-title {
+      font-weight: 600;
+    }
+
+    .border-yellow {
+      border-bottom: 2px solid #f9c927;
+      display: inline-block;
+      padding-bottom: 0.2rem;
+      margin-bottom: 0.3rem;
+    }
+
+    /* Modal Styles */
+    .modal-header {
+      background-color: #4d6dff;
+      color: white;
+      border-bottom: none;
+      border-radius: 0.5rem 0.5rem 0 0;
+    }
+
+    .modal-body {
+      padding: 2rem 2rem 1rem 2rem;
+      background-color: #f8f9fa;
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .modal-footer {
+      border-top: none;
+      padding: 1rem 2rem 2rem 2rem;
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+    }
+
+    .btn-save {
+      background-color: #1736c2;
+      color: white;
+      border-radius: 25px;
+      padding: 0.5rem 1.5rem;
+      font-weight: 600;
+      border: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-save:hover {
+      background-color: #3b55cc;
+    }
+
+    .btn-cancel {
+      background-color: #e9e1e1;
+      color: #555;
+      border-radius: 25px;
+      padding: 0.5rem 1.5rem;
+      font-weight: 600;
+      border: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-cancel:hover {
+      background-color: #cacaca;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Título centrado -->
+<div class="container mt-4">
+  <h2 style="color: #007bff;" class="text-center fw-bold mb-3">Mi Perfil</h2>
+</div>
+
+<div class="text-center mt-4">
+  <!-- Aquí un img para mostrar la foto (cuando tenga backend) -->
+  <img id="profileImage" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Foto de perfil" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid #4d6dff;" />
+
+  <!-- Título centrado -->
+<div class="container mt-4">
+  <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap">
+    <h2 id="nombreTitulo" style="color: #007bff;" class="fw-bold mb-0">a</h2>
+  </div>
+</div>
+  <div class="mt-2">
+    <button id="btnActualizar" class="btn btn-custom mb-3">Actualizar Datos</button>
+  </div>
+</div> 
+
+<!-- Sección de Información Basica 1 -->
+<div class="container mt-4">
+  <div class="row g-4">
+    <div class="col-md-6">
+      <div class="card bg-primary text-white border-0 shadow">
+        <div class="card-body d-flex align-items-center">
+          <i class="fas fa-user fa-lg me-3"></i>
+          <div>
+            <h6 class="mb-0">Usuario</h6>
+            <p class="mb-0 fw-semibold" id="usuarioText"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-6">
+      <div class="card bg-primary text-white border-0 shadow">
+        <div class="card-body d-flex align-items-center">
+          <i class="fas fa-cogs fa-lg me-3"></i>
+          <div>
+            <h6 class="mb-0">Área de Trabajo</h6>
+            <p class="mb-0 fw-semibold" id="areaText"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card bg-primary text-white border-0 shadow">
+        <div class="card-body d-flex align-items-center">
+          <i class="fas fa-phone fa-lg me-3"></i>
+          <div>
+            <h6 class="mb-0">Contacto</h6>
+            <p class="mb-0 fw-semibold" id="extensionText"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card bg-primary text-white border-0 shadow">
+        <div class="card-body d-flex align-items-center">
+          <i class="fas fa-users fa-lg me-3"></i>
+          <div>
+            <h6 class="mb-0">Tipo de Usuario</h6>
+            <p class="mb-0 fw-semibold" id="tipoUsuarioText"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card bg-primary text-white border-0 shadow">
+        <div class="card-body d-flex align-items-center">
+          <i class="fas fa-clipboard fa-lg me-3"></i>
+          <div>
+            <h6 class="mb-0">Cargo</h6>
+            <p class="mb-0 fw-semibold" id="cargoText"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card bg-primary text-white border-0 shadow">
+        <div class="card-body d-flex align-items-center">
+          <i class="fas fa-envelope fa-lg me-3"></i>
+          <div>
+            <h6 class="mb-0">Correo Institucional</h6>
+            <p class="mb-0 fw-semibold" id="correoText"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Actualización -->
+<div class="modal fade" id="modalActualizar" tabindex="-1" aria-labelledby="modalActualizarLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content shadow-lg">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalActualizarLabel"><i class="fas fa-edit me-2"></i>Actualizar Información</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formActualizar">
+              <div class="mb-3">
+            <label for="inputFoto" class="form-label">Cambiar Foto de Perfil</label>
+            <input type="file" class="form-control" id="inputFoto" accept="image/*" />
+          </div>
+           <div class="mb-3">
+                <label for="nombreInput" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombreInput" value="Rochoa">
+              </div>
+          <div class="mb-3">
+            <label for="inputUsuario" class="form-label">Usuario</label>
+            <input type="text" class="form-control" id="inputUsuario" required />
+          </div>
+          <div class="mb-3">
+            <label for="inputArea" class="form-label">Área de Trabajo</label>
+            <input type="text" class="form-control" id="inputArea" required />
+          </div>
+          <div class="mb-3">
+            <label for="inputExtension" class="form-label">Contacto</label>
+            <input type="text" id="inputExtension" class="form-control" pattern="\d{8}" maxlength="8" required title="Debe contener exactamente 8 dígitos numéricos">
+          </div>
+          <div class="mb-3">
+            <label for="inputTipoUsuario" class="form-label">Tipo de Usuario</label>
+            <input type="text" class="form-control" id="inputTipoUsuario" required />
+          </div>
+          <div class="mb-3">
+            <label for="inputCargo" class="form-label">Cargo</label>
+            <input type="text" class="form-control" id="inputCargo" required />
+          </div>
+          <div class="mb-3">
+            <label for="inputCorreo" class="form-label">Correo Institucional</label>
+            <input type="email" class="form-control" id="inputCorreo" required />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" form="formActualizar" class="btn btn-save">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Script Información Basica 1 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  // Datos iniciales (Backend)
+  let perfil = {
+    foto: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+    nombre: '',
+    usuario: '',
+    area: '',
+    extension: '',
+    tipoUsuario: '',
+    cargo: '',
+    correo: ''
+  };
+
+  // Referencias DOM
+  const profileImage = document.getElementById('profileImage');
+  const nombreTitulo = document.getElementById('nombreTitulo');
+  const usuarioText = document.getElementById('usuarioText');
+  const areaText = document.getElementById('areaText');
+  const extensionText = document.getElementById('extensionText');
+  const tipoUsuarioText = document.getElementById('tipoUsuarioText');
+  const cargoText = document.getElementById('cargoText');
+  const correoText = document.getElementById('correoText');
+
+  // Inputs del modal actualización datos básicos
+  const modalActualizar = new bootstrap.Modal(document.getElementById('modalActualizar'));
+  const nombreInput = document.getElementById('nombreInput');
+  const inputUsuario = document.getElementById('inputUsuario');
+  const inputArea = document.getElementById('inputArea');
+  const inputExtension = document.getElementById('inputExtension');
+  const inputTipoUsuario = document.getElementById('inputTipoUsuario');
+  const inputCargo = document.getElementById('inputCargo');
+  const inputCorreo = document.getElementById('inputCorreo');
+  const inputFoto = document.getElementById('inputFoto');
+
+  // Botón actualizar datos básicos
+  document.getElementById('btnActualizar').addEventListener('click', () => {
+    
+    // Llenar inputs con datos actuales
+    nombreInput.value = perfil.nombre;
+    inputUsuario.value = perfil.usuario;
+    inputArea.value = perfil.area;
+    inputExtension.value = perfil.extension;
+    inputTipoUsuario.value = perfil.tipoUsuario;
+    inputCargo.value = perfil.cargo;
+    inputCorreo.value = perfil.correo;
+    inputFoto.value = '';
+    modalActualizar.show();
+  });
+
+  // Mostrar datos en la página
+  function mostrarDatos() {
+    profileImage.src = perfil.foto;
+    nombreTitulo.textContent = perfil.nombre;
+    usuarioText.textContent = perfil.usuario;
+    areaText.textContent = perfil.area;
+    extensionText.textContent = perfil.extension;
+    tipoUsuarioText.textContent = perfil.tipoUsuario;
+    cargoText.textContent = perfil.cargo;
+    correoText.textContent = perfil.correo;
+  }
+
+  mostrarDatos();
+
+  // Guardar cambios del formulario básico
+  document.getElementById('formActualizar').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    perfil.nombre = nombreInput.value.trim();
+    perfil.usuario = inputUsuario.value.trim();
+    perfil.area = inputArea.value.trim();
+    perfil.extension = inputExtension.value.trim();
+    perfil.tipoUsuario = inputTipoUsuario.value.trim();
+    perfil.cargo = inputCargo.value.trim();
+    perfil.correo = inputCorreo.value.trim();
+
+    // Cambiar foto si se seleccionó alguna
+    if (inputFoto.files && inputFoto.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        perfil.foto = e.target.result;
+        mostrarDatos();
+      };
+      reader.readAsDataURL(inputFoto.files[0]);
+    } else {
+      mostrarDatos();
+    }
+
+    modalActualizar.hide();
+  });
+});
+</script>
+
+<!-- Script para manejo modales y actualizaciónes -->
+<script>
+  document.querySelectorAll('.actualizar-btn').forEach(button => {
+    button.addEventListener('click', function () {
+      const section = this.dataset.section;
+      const targetId = section + 'Text';
+      const currentText = document.getElementById(targetId).textContent.trim();
+
+      // Rellenar el modal
+      document.getElementById('modalInput').value = currentText;
+      document.getElementById('modalForm').dataset.target = targetId;
+
+      // Mostrar el modal
+      const modal = new bootstrap.Modal(document.getElementById('modalActualizacion'));
+      modal.show();
+    });
+  });
+
+  document.getElementById('guardarCambiosBtn').addEventListener('click', function () {
+    const input = document.getElementById('modalInput').value;
+    const targetId = document.getElementById('modalForm').dataset.target;
+    document.getElementById(targetId).textContent = input;
+
+    // Cerrar modal
+    const modalEl = document.getElementById('modalActualizacion');
+    const modalInstance = bootstrap.Modal.getInstance(modalEl);
+    modalInstance.hide();
+  });
+</script>
+
+<!-- Seccion de Información Basica 2 -->
+<div class="row text-center mt-5">
+  
+<!-- Sección Acciones Personales -->
+<div class="col-md-6 mb-4 text-center">
+  <h5 class="border-yellow">
+    📑 ACCIONES PERSONALES
+  </h5>
+  <div id="accionesPersonalesText"></div>
+  <button class="btn btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#modalAccionesPersonales">
+    Agregar o Actualizar Documentos
+  </button>
+</div>
+
+
+<!-- Modal Acciones Personales -->
+<div class="modal fade" id="modalAccionesPersonales" tabindex="-1" aria-labelledby="modalAccionesPersonalesLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content rounded-4 shadow">
+      <div class="modal-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <h5 class="modal-title">📑 Acciones Personales</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <input type="file" id="accionesPersonalesFile" class="form-control mb-3" accept=".pdf,.doc,.docx" multiple>
+        <div class="d-flex gap-2">
+          <button class="btn btn-primary" onclick="agregarArchivosAcciones()">Agregar Archivos</button>
+          <button class="btn btn-danger" onclick="eliminarTodosArchivosAcciones()">Eliminar Todo</button>
+          <button class="btn btn-secondary ms-auto" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+        <div id="accionesPersonalesPreview" class="row gy-3 mt-3"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Script Funcional -->
+<script>
+  let archivosAcciones = [];
+  let urlsAcciones = [];
+
+  function agregarArchivosAcciones() {
+    const input = document.getElementById('accionesPersonalesFile');
+    const nuevosArchivos = Array.from(input.files);
+
+    if (archivosAcciones.length + nuevosArchivos.length > 10) {
+      alert("Máximo 10 archivos permitidos.");
+      input.value = '';
+      return;
+    }
+
+    nuevosArchivos.forEach(archivo => {
+      archivosAcciones.push(archivo);
+      const url = URL.createObjectURL(archivo);
+      urlsAcciones.push(url);
+    });
+
+    input.value = '';
+    actualizarVistaArchivos();
+  }
+
+  function actualizarVistaArchivos() {
+    const preview = document.getElementById('accionesPersonalesPreview');
+    const resumen = document.getElementById('accionesPersonalesText');
+    preview.innerHTML = '';
+    resumen.innerHTML = '';
+
+    archivosAcciones.forEach((archivo, index) => {
+      const url = urlsAcciones[index];
+      const tipo = archivo.type;
+      const nombre = archivo.name;
+
+      const contenido = tipo === 'application/pdf'
+        ? `<iframe src="${url}" width="100%" height="200px" class="rounded"></iframe>`
+        : `<a href="${url}" download="${nombre}" class="btn btn-primary btn-sm mt-2">Descargar</a>`;
+
+      preview.innerHTML += `
+        <div class="col-md-6 border p-3 rounded bg-primary text-white">
+          <strong>📎 ${nombre}</strong>
+          <div class="mt-2">${contenido}</div>
+          <button class="btn btn-sm btn-light mt-2" onclick="eliminarArchivoAcciones(${index})">Eliminar</button>
+        </div>
+      `;
+
+      resumen.innerHTML += `📎 ${nombre}<br>`;
+    });
+  }
+
+  function eliminarArchivoAcciones(index) {
+    URL.revokeObjectURL(urlsAcciones[index]);
+    archivosAcciones.splice(index, 1);
+    urlsAcciones.splice(index, 1);
+    actualizarVistaArchivos();
+  }
+
+  function eliminarTodosArchivosAcciones() {
+    archivosAcciones = [];
+    urlsAcciones.forEach(url => URL.revokeObjectURL(url));
+    urlsAcciones = [];
+    document.getElementById('accionesPersonalesPreview').innerHTML = '';
+    document.getElementById('accionesPersonalesText').innerHTML = '';
+    document.getElementById('accionesPersonalesFile').value = '';
+  }
+</script>
+
+  <!-- Horario Disponible -->
+  <div class="col-md-6 mb-4">
+   <h5 class="border-yellow">
+    📅 Horario Disponible
+  </h5>
+    <ul id="horarioDisponibleText" class="list-group mb-2"></ul>
+    <button class="btn btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#modalHorario">
+      Agregar o Actualizar Horario
+    </button>
+  </div>
+
+<!-- Modal Horario -->
+<div class="modal fade" id="modalHorario" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content rounded-4 shadow">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">📅 Horario Disponible</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <select id="diaSeleccionado" class="form-select mb-2">
+          <option>⏱️ Lunes</option>
+          <option>⏱️ Martes</option>
+          <option>⏱️ Miércoles</option>
+          <option>⏱️ Jueves</option>
+          <option>⏱️ Viernes</option>
+          <option>⏱️ Sábado</option>
+        </select>
+        <div class="d-flex gap-2 mb-3">
+          <input type="time" id="horaInicio" class="form-control" placeholder="Inicio">
+          <input type="time" id="horaFin" class="form-control" placeholder="Fin">
+        </div>
+        <button class="btn btn-outline-success w-100" onclick="agregarHorario()">Agregar Horario</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Script Funcional con Validaciones-->
+<script>
+  let horarios = [];  
+  let indiceEditando = null; // <- Para saber si estamos editando o agregando
+
+  function agregarHorario() {
+    const dia = document.getElementById('diaSeleccionado').value;
+    const inicio = document.getElementById('horaInicio').value;
+    const fin = document.getElementById('horaFin').value;
+
+    if (!inicio || !fin) {
+      alert("Debe ingresar la hora de inicio y fin.");
+      return;
+    }
+
+    if (inicio >= fin) {
+      alert("La hora de inicio debe ser menor que la hora de fin.");
+      return;
+    }
+
+    const nuevo = { dia, inicio, fin };
+
+    if (indiceEditando !== null) {
+      // Actualizamos el horario existente
+      horarios[indiceEditando] = nuevo;
+      indiceEditando = null;
+    } else {
+      // Agregamos nuevo horario
+      horarios.push(nuevo);
+    }
+
+    actualizarListaHorarios();
+    limpiarCamposHorario();
+
+    bootstrap.Modal.getInstance(document.getElementById('modalHorario')).hide();
+  }
+
+  function actualizarListaHorarios() {
+    const lista = document.getElementById('horarioDisponibleText');
+    lista.innerHTML = '';
+
+    horarios.forEach((item, index) => {
+      const li = document.createElement('li');
+      li.className = 'list-group-item d-flex justify-content-between align-items-center';
+      li.innerHTML = `
+        ${item.dia}: ${item.inicio} - ${item.fin}
+        <div class="d-flex gap-2">
+          <button 
+            class="btn btn-sm btn-warning d-flex align-items-center gap-1" 
+            onclick="editarHorario(${index})" 
+            title="Editar">
+            🖋️ <span>Editar</span>
+          </button>
+          <button 
+            class="btn btn-sm btn-danger d-flex align-items-center gap-1" 
+            onclick="eliminarHorario(${index})" 
+            title="Eliminar">
+            🗑️ <span>Eliminar</span>
+          </button>
+        </div>`;
+      lista.appendChild(li);
+    });
+  }
+
+  function editarHorario(index) {
+    const item = horarios[index];
+    document.getElementById('diaSeleccionado').value = item.dia;
+    document.getElementById('horaInicio').value = item.inicio;
+    document.getElementById('horaFin').value = item.fin;
+    indiceEditando = index;
+
+    const modal = new bootstrap.Modal(document.getElementById('modalHorario'));
+    modal.show();
+  }
+
+  function eliminarHorario(index) {
+    if (confirm("¿Estás seguro de eliminar este horario?")) {
+      horarios.splice(index, 1);
+      actualizarListaHorarios();
+    }
+  }
+
+  function limpiarCamposHorario() {
+    document.getElementById('diaSeleccionado').selectedIndex = 0;
+    document.getElementById('horaInicio').value = '';
+    document.getElementById('horaFin').value = '';
+    indiceEditando = null;
+  }
+</script>
+
+<!-- Sección Diplomas y Certificaciones -->
+<div class="col-12 mb-4 text-center">
+  <h5 class="border-yellow">
+    📃 DIPLOMAS Y CERTIFICACIONES OBTENIDAS
+  </h5>
+  <div id="diplomasText"></div>
+  <button class="btn btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#modalDiplomas">
+    Agregar o Actualizar Documentos
+  </button>
+</div>
+
+<!-- Modal Diplomas y Certificaciones -->
+<div class="modal fade" id="modalDiplomas" tabindex="-1" aria-labelledby="modalDiplomasLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content rounded-4 shadow">
+      <div class="modal-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <h5 class="modal-title">📃 Diplomas y Certificaciones</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <input type="file" id="diplomasFile" class="form-control mb-3" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" multiple>
+        <div class="d-flex gap-2">
+          <button class="btn btn-primary" onclick="agregarArchivosDiplomas()">Agregar Archivos</button>
+          <button class="btn btn-danger" onclick="eliminarTodosArchivosDiplomas()">Eliminar Todo</button>
+          <button class="btn btn-secondary ms-auto" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+        <div id="diplomasPreview" class="row gy-3 mt-3"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Script Funcional -->
+<script>
+  let archivosDiplomas = [];
+  let urlsDiplomas = [];
+
+  function agregarArchivosDiplomas() {
+    const input = document.getElementById('diplomasFile');
+    const nuevosArchivos = Array.from(input.files);
+
+    if (archivosDiplomas.length + nuevosArchivos.length > 10) {
+      alert("Máximo 10 archivos permitidos.");
+      input.value = '';
+      return;
+    }
+
+    nuevosArchivos.forEach(archivo => {
+      archivosDiplomas.push(archivo);
+      const url = URL.createObjectURL(archivo);
+      urlsDiplomas.push(url);
+    });
+
+    input.value = '';
+    actualizarVistaDiplomas();
+  }
+
+  function actualizarVistaDiplomas() {
+    const preview = document.getElementById('diplomasPreview');
+    const resumen = document.getElementById('diplomasText');
+    preview.innerHTML = '';
+    resumen.innerHTML = '';
+
+    archivosDiplomas.forEach((archivo, index) => {
+      const url = urlsDiplomas[index];
+      const tipo = archivo.type;
+      const nombre = archivo.name;
+
+      const contenido = tipo === 'application/pdf'
+        ? `<iframe src="${url}" width="100%" height="200px" class="rounded"></iframe>`
+        : `<a href="${url}" download="${nombre}" class="btn btn-primary btn-sm mt-2">Descargar</a>`;
+
+      preview.innerHTML += `
+        <div class="col-md-6 border p-3 rounded bg-primary text-white">
+          <strong>📎 ${nombre}</strong>
+          <div class="mt-2">${contenido}</div>
+          <button class="btn btn-sm btn-light mt-2" onclick="eliminarArchivoDiplomas(${index})">Eliminar</button>
+        </div>
+      `;
+
+      resumen.innerHTML += `📎 ${nombre}<br>`;
+    });
+  }
+
+  function eliminarArchivoDiplomas(index) {
+    URL.revokeObjectURL(urlsDiplomas[index]);
+    archivosDiplomas.splice(index, 1);
+    urlsDiplomas.splice(index, 1);
+    actualizarVistaDiplomas();
+  }
+
+  function eliminarTodosArchivosDiplomas() {
+    archivosDiplomas = [];
+    urlsDiplomas.forEach(url => URL.revokeObjectURL(url));
+    urlsDiplomas = [];
+    document.getElementById('diplomasPreview').innerHTML = '';
+    document.getElementById('diplomasText').innerHTML = '';
+    document.getElementById('diplomasFile').value = '';
+  }
+</script>
+
+<!-- Sección de Información Basica 3 -->
+<div class="container mt-5">
+  <div class="d-flex justify-content-center gap-3 flex-wrap">
+    <button class="btn btn-primary rounded-pill py-2 px-4" onclick="mostrarSeccion('infoPersonal')">
+      Información Personal
+    </button>
+    <button class="btn btn-primary rounded-pill py-2 px-4" onclick="mostrarSeccion('infoEducativa')">
+      Información Educativa
+    </button>
+    <button class="btn btn-primary rounded-pill py-2 px-4" onclick="mostrarSeccion('infoFamiliar')">
+      Información Familiar
+    </button>
+    <button class="btn btn-primary rounded-pill py-2 px-4" onclick="mostrarSeccion('infoReligiosa')">
+      Información Religiosa
+    </button>
+    <button class="btn btn-primary rounded-pill py-2 px-4" onclick="mostrarSeccion('misDocumentos')">
+      Mis Documentos
+    </button>
+    <button class="btn btn-primary rounded-pill py-2 px-4" onclick="mostrarSeccion('asignaciones')">
+      Asignaturas
+    </button>
+  </div>
+</div>
+
+<!-- Contenedor de Información Personal -->
+<div class="container mt-4" id="infoPersonal" style="display: none;">
+  <div class="mx-auto" style="max-width: 840px;">
+    <div class="card shadow-lg border-0 rounded-4">
+      <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0"><i class="fas fa-user me-2"></i>Información Personal</h5>
+        <button class="btn btn-light btn-sm rounded-pill" onclick="habilitarEdicion()">
+          <i class="fas fa-edit me-1"></i>Agregar o Editar Información
+        </button>
+      </div>
+      <div class="card-body" style="max-height: 75vh; overflow-y: auto;">
+        <form id="formPersonal">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Nombre completo</label>
+              <input type="text" class="form-control" id="nombre" value="" disabled>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Usuario</label>
+              <input type="text" class="form-control" id="usuario" value="" disabled>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Área de Trabajo</label>
+              <input type="text" class="form-control" id="area" value="" disabled>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Contacto</label>
+              <input type="text" class="form-control" id="extension" value="" disabled maxlength="8">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Tipo de Usuario</label>
+              <input type="text" class="form-control" id="tipo" value="" disabled>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Cargo</label>
+              <input type="text" class="form-control" id="cargo" value="" disabled>
+            </div>
+            <div class="col-12">
+              <label class="form-label fw-bold">Correo Institucional</label>
+              <input type="email" class="form-control" id="correo" value="" disabled>
+            </div>
+          </div>
+          <div class="mt-4 d-flex justify-content-end">
+            <button type="button" class="btn btn-success d-none" id="btnGuardar" onclick="guardarCambios()">
+              <i class="fas fa-save me-1"></i>Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Script funcional -->
+<script>
+  function mostrarSeccion(id) {
+    document.querySelectorAll('[id^="info"]').forEach(div => {
+      div.style.display = 'none';
+    });
+    const seccion = document.getElementById(id);
+    if (seccion) {
+      seccion.style.display = 'block';
+    }
+  }
+
+  function habilitarEdicion() {
+    document.querySelectorAll('#formPersonal input').forEach(input => input.disabled = false);
+    document.getElementById('btnGuardar').classList.remove('d-none');
+  }
+
+  function guardarCambios() {
+    document.querySelectorAll('#formPersonal input').forEach(input => input.disabled = true);
+    document.getElementById('btnGuardar').classList.add('d-none');
+    alert('Información actualizada con éxito.');
+    // Aquí podrías hacer una petición AJAX si quieres guardar al servidor
+  }
+</script>
+
+<!-- Contenedor de Información Educativa -->
+<div class="container mt-4" id="infoEducativa" style="display: none;">
+  <div class="mx-auto" style="max-width: 840px;">
+    <div class="card shadow-lg border-0 rounded-4">
+      <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0"><i class="fas fa-graduation-cap me-2"></i>Información Educativa</h5>
+        <button class="btn btn-light btn-sm rounded-pill" onclick="habilitarEdicionEdu()">
+          <i class="fas fa-edit me-1"></i>Agregar o Editar Información
+        </button>
+      </div>
+      <div class="card-body" style="max-height: 75vh; overflow-y: auto;">
+        <form id="formEducativa">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Fecha de Inicio</label>
+              <input type="date" class="form-control" id="fechaInicio" value="" disabled>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Fecha de Fin</label>
+              <input type="date" class="form-control" id="fechaFin" value="" disabled>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Institución</label>
+              <input type="text" class="form-control" id="institucion" value="" disabled>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Título Obtenido</label>
+              <input type="text" class="form-control" id="titulo" value="" disabled>
+            </div>
+          </div>
+          <div class="mt-4 d-flex justify-content-end">
+            <button type="button" class="btn btn-success d-none" id="btnGuardarEdu" onclick="guardarCambiosEdu()">
+              <i class="fas fa-save me-1"></i>Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Script funcional -->
+<script>
+  function habilitarEdicionEdu() {
+    document.querySelectorAll('#formEducativa input').forEach(input => input.disabled = false);
+    document.getElementById('btnGuardarEdu').classList.remove('d-none');
+  }
+
+  function guardarCambiosEdu() {
+    document.querySelectorAll('#formEducativa input').forEach(input => input.disabled = true);
+    document.getElementById('btnGuardarEdu').classList.add('d-none');
+    alert('Información educativa actualizada.');
+    // Aquí podrías agregar lógica para guardar datos al backend si hace falta
+  }
+</script>
+
+<!-- Contenedor de Información Familiar -->
+<div class="container mt-4" id="infoFamiliar" style="display: none;">
+  <div class="mx-auto" style="max-width: 840px;">
+    <div class="card shadow-lg border-0 rounded-4">
+      <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0"><i class="fas fa-users me-2"></i>Información Familiar</h5>
+        <button class="btn btn-light btn-sm rounded-pill" onclick="habilitarEdicionFamiliar()">
+          <i class="fas fa-edit me-1"></i>Agregar o Editar Información
+        </button>
+      </div>
+      <div class="card-body" style="max-height: 75vh; overflow-y: auto;">
+        <form id="formFamiliar">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Nombre Completo</label>
+              <input type="text" class="form-control" id="nombresResponsables" value="" disabled>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Lugar de Trabajo</label>
+              <input type="text" class="form-control" id="lugarTrabajo" value="" disabled>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Teléfono</label>
+              <input type="tel" class="form-control" id="telefonoResponsable" value="" maxlength="8" disabled>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Correo</label>
+              <input type="email" class="form-control" id="gmailResponsable" value="" disabled>
+            </div>
+          </div>
+          <div class="mt-4 d-flex justify-content-end">
+            <button type="button" class="btn btn-success d-none" id="btnGuardarFamiliar" onclick="guardarCambiosFamiliar()">
+              <i class="fas fa-save me-1"></i>Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Script funcional -->
+<script>
+  function habilitarEdicionFamiliar() {
+  document.querySelectorAll('#formFamiliar input').forEach(input => input.disabled = false);
+  document.getElementById('btnGuardarFamiliar').classList.remove('d-none');
+}
+
+function guardarCambiosFamiliar() {
+  // Aquí puedes agregar lógica para guardar la información
+  alert('Información Familiar actualizada correctamente.');
+
+  // Volver a deshabilitar los inputs
+  document.querySelectorAll('#formFamiliar input').forEach(input => input.disabled = true);
+  document.getElementById('btnGuardarFamiliar').classList.add('d-none');
+}
+</script>
+
+<!-- Contenedor de Información Religiosa -->
+<div class="container mt-4" id="infoReligiosa" style="display: none;">
+  <div class="mx-auto" style="max-width: 800px;">
+    <div class="card shadow-lg border-0 rounded-4">
+      <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0"><i class="fas fa-church me-2"></i>Información Religiosa</h5>
+        <button class="btn btn-light btn-sm rounded-pill" onclick="habilitarEdicionReligiosa()">
+          <i class="fas fa-edit me-1"></i>Agregar o Editar Información
+        </button>
+      </div>
+      <div class="card-body" style="max-height: 75vh; overflow-y: auto;">
+        <form id="formReligiosa">
+          <div class="row g-3">
+            <div class="col-12">
+              <label class="form-label fw-bold">Sacramentos</label>
+              <input type="text" class="form-control" id="sacramentos" value="" disabled>
+            </div>
+          </div>
+          <div class="mt-4 d-flex justify-content-end">
+            <button type="button" class="btn btn-success d-none" id="btnGuardarReligiosa" onclick="guardarCambiosReligiosa()">
+              <i class="fas fa-save me-1"></i>Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Script funcional -->
+<script>
+  function habilitarEdicionReligiosa() {
+  document.getElementById('sacramentos').disabled = false;
+  document.getElementById('btnGuardarReligiosa').classList.remove('d-none');
+}
+
+function guardarCambiosReligiosa() {
+  // Aquí puedes agregar lógica para guardar la información
+  alert('Información Religiosa actualizada correctamente.');
+
+  // Volver a deshabilitar el input
+  document.getElementById('sacramentos').disabled = true;
+  document.getElementById('btnGuardarReligiosa').classList.add('d-none');
+}
+</script>
+
+<!-- Contenedor de Mis Documentos -->
+<div class="container mt-4" id="misDocumentos" style="display: none;">
+  <div class="mx-auto" style="max-width: 840px;">
+    <div class="card shadow-lg border-0 rounded-4">
+      <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0"><i class="fas fa-file-alt me-2"></i>Mis Documentos</h5>
+      </div>
+      <div class="card-body" style="max-height: 75vh; overflow-y: auto;">
+        <form id="formDocumentos">
+          <div class="mb-3">
+            <label for="archivo" class="form-label fw-bold">Subir Documento</label>
+            <input type="file" class="form-control" id="archivo" accept=".pdf,.doc,.docx,.png,.jpg">
+          </div>
+          <div class="mt-3">
+            <h6 class="fw-bold">Documentos Subidos</h6>
+            <ul class="list-group" id="listaDocumentos">
+              <!-- Documentos se agregan aquí -->
+            </ul>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Script funcional con Validaciones -->
+<script>
+  let documentos = [];
+  let contador = 0;
+
+  document.getElementById('archivo').addEventListener('change', function (e) {
+    const archivo = e.target.files[0];
+    if (archivo) {
+      const id = `doc-${contador++}`;
+      const url = URL.createObjectURL(archivo);
+
+      documentos.push({ id, archivo, url });
+
+      const lista = document.getElementById('listaDocumentos');
+      const item = document.createElement('li');
+      item.className = 'list-group-item d-flex justify-content-between align-items-center';
+      item.id = id;
+      item.innerHTML = `
+        <span>${archivo.name}</span>
+        <div class="btn-group">
+          <a href="${url}" target="_blank" class="btn btn-sm btn-outline-primary" title="Ver o Descargar">
+            <i class="fas fa-eye"></i>
+          </a>
+          <button class="btn btn-sm btn-outline-danger" onclick="eliminarDocumento('${id}')" title="Eliminar">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </div>
+      `;
+      lista.appendChild(item);
+    }
+  });
+
+  function eliminarDocumento(id) {
+    const item = document.getElementById(id);
+    if (item) {
+      item.remove();
+      documentos = documentos.filter(doc => doc.id !== id);
+    }
+  }
+</script>
+
+
+<!-- Contenedor de Asignaturas -->
+<div class="container mt-4" id="asignaciones" style="display: none;">
+  <div class="mx-auto" style="max-width: 840px;">
+    <div class="card shadow-lg border-0 rounded-4">
+      <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0"><i class="fas fa-book me-2"></i>Asignaturas</h5>
+      </div>
+      <div class="card-body" style="max-height: 75vh; overflow-y: auto;">
+        <div class="row g-2 align-items-end">
+          <div class="col-md-9">
+            <label class="form-label fw-bold">Agregar Materia</label>
+            <input type="text" class="form-control" id="nuevaMateria" placeholder="">
+          </div>
+          <div class="col-md-3 d-grid">
+            <button type="button" class="btn btn-primary" onclick="agregarMateria()">
+              <i class="fas fa-plus me-1"></i>Agregar Materia
+            </button>
+          </div>
+        </div>
+
+        <!-- Lista de materias -->
+        <div class="mt-4" id="listaMaterias"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Script Funcional con Validaciones -->
+<script>
+  let contadorMaterias = 0;
+
+  function agregarMateria() {
+    const input = document.getElementById('nuevaMateria');
+    const materia = input.value.trim();
+
+    if (materia === '') {
+      alert('Por favor, escribe el nombre de la materia.');
+      return;
+    }
+
+    const lista = document.getElementById('listaMaterias');
+    const tabla = document.createElement('table');
+    tabla.className = 'table table-bordered mt-3';
+    tabla.id = `materia-${contadorMaterias}`;
+
+    tabla.innerHTML = `
+      <thead class="table-light">
+        <tr>
+          <th class="text-center d-flex justify-content-between align-items-center">
+            <span id="nombre-${contadorMaterias}">${materia}</span>
+            <div>
+              <button class="btn btn-sm btn-outline-primary me-1" onclick="editarMateria(${contadorMaterias})" title="Editar">
+                🖋️
+              </button>
+              <button class="btn btn-sm btn-outline-danger" onclick="eliminarMateria(${contadorMaterias})" title="Eliminar">
+                🗑️
+              </button>
+            </div>
+          </th>
+        </tr>
+      </thead>
+    `;
+
+    lista.appendChild(tabla);
+    contadorMaterias++;
+
+    input.value = '';
+    input.focus();
+  }
+
+  function editarMateria(id) {
+    const nombreSpan = document.getElementById(`nombre-${id}`);
+    const nuevoNombre = prompt('Editar nombre de la materia:', nombreSpan.textContent);
+
+    if (nuevoNombre !== null && nuevoNombre.trim() !== '') {
+      nombreSpan.textContent = nuevoNombre.trim();
+    }
+  }
+
+  function eliminarMateria(id) {
+    const tabla = document.getElementById(`materia-${id}`);
+    if (tabla) {
+      tabla.remove();
+    }
+  }
+</script>
+
+<!-- Validaciones de cada Sección -->
+
+<!-- Validacion para Información Basica 1 -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("formActualizar");
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault(); // Evita el envío por defecto
+
+      // Obtener valores
+      const usuario = document.getElementById("inputUsuario").value.trim();
+      const area = document.getElementById("inputArea").value.trim();
+      const extension = document.getElementById("inputExtension").value.trim();
+      const tipoUsuario = document.getElementById("inputTipoUsuario").value.trim();
+      const cargo = document.getElementById("inputCargo").value.trim();
+      const correo = document.getElementById("inputCorreo").value.trim();
+      const nombre = document.getElementById("nombreInput").value.trim();
+
+      // Validación del contacto (8 dígitos)
+      const extensionValida = /^\d{8}$/.test(extension);
+      if (!extensionValida) {
+        alert("El número de contacto debe contener exactamente 8 dígitos.");
+        return;
+      }
+
+      // Validación de correo
+      const correoValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo);
+      if (!correoValido) {
+        alert("Ingrese un correo institucional válido.");
+        return;
+      }
+
+      // Validar campos vacíos
+      if (!usuario || !area || !tipoUsuario || !cargo || !correo || !nombre) {
+        alert("Por favor, complete todos los campos requeridos.");
+        return;
+      }
+
+      // Si todo está correcto
+      alert("¡Datos actualizados correctamente!");
+      // Aquí podrías enviar los datos al servidor si lo deseas
+      const modal = bootstrap.Modal.getInstance(document.getElementById('modalActualizar'));
+      modal.hide();
+    });
+  });
+</script>
+
+<!-- Validacion para Información Basica 2 -->
+
+<!-- Sección Acciones Personales y Diplomados y Certificados -->
+ 
+<script>
+  let archivosPorCategoria = {
+    acciones: [],
+    diplomados: [],
+    certificados: []
+  };
+
+  function agregarArchivo(categoria, inputId, previewId) {
+    const input = document.getElementById(inputId);
+    const nuevosArchivos = Array.from(input.files);
+    archivosPorCategoria[categoria] = archivosPorCategoria[categoria].concat(nuevosArchivos);
+    input.value = "";
+    renderizarPreview(categoria, previewId);
+  }
+
+  function renderizarPreview(categoria, previewId) {
+    const contenedor = document.getElementById(previewId);
+    const archivos = archivosPorCategoria[categoria];
+    contenedor.innerHTML = "";
+
+    if (archivos.length === 0) {
+      contenedor.innerHTML = '<p class="text-muted text-center">No hay archivos seleccionados.</p>';
+      return;
+    }
+
+    archivos.forEach((archivo, index) => {
+      const col = document.createElement("div");
+      col.className = "col-md-6 mb-3";
+      const url = URL.createObjectURL(archivo);
+
+      let previewHTML = '';
+      if (archivo.type.startsWith("image/")) {
+        previewHTML = `<img src="${url}" alt="${archivo.name}" class="img-fluid rounded mb-2" style="max-height: 200px;">`;
+      } else if (archivo.type === "application/pdf") {
+        previewHTML = `<iframe src="${url}" class="w-100" style="height: 200px;" frameborder="0"></iframe>`;
+      } else {
+        previewHTML = `<p class="text-muted">${archivo.name}</p>`;
+      }
+
+      col.innerHTML = `
+        <div class="border p-3 rounded bg-light">
+          ${previewHTML}
+          <div class="d-flex justify-content-between align-items-center">
+            <small><i class="fas fa-file-alt text-primary me-2"></i>${archivo.name}</small>
+            <button class="btn btn-sm btn-outline-danger" onclick="eliminarArchivo('${categoria}', ${index}, '${previewId}')">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+        </div>
+      `;
+
+      contenedor.appendChild(col);
+    });
+  }
+
+  function eliminarArchivo(categoria, index, previewId) {
+    archivosPorCategoria[categoria].splice(index, 1);
+    renderizarPreview(categoria, previewId);
+  }
+
+  function eliminarTodosArchivos(categoria, previewId) {
+    if (confirm("¿Estás seguro de eliminar todos los archivos?")) {
+      archivosPorCategoria[categoria] = [];
+      renderizarPreview(categoria, previewId);
+    }
+  }
+</script>
+
+<!-- Validacion para Información Basica 3 -->
+
+<!-- Contenedor de Información Personal -->
+<script>
+  function habilitarEdicion() {
+  // Obtener todos los inputs dentro del formulario
+  const inputs = document.querySelectorAll('#formPersonal input');
+  inputs.forEach(input => {
+    input.disabled = false;
+  });
+  // Mostrar el botón guardar
+  document.getElementById('btnGuardar').classList.remove('d-none');
+}
+
+function guardarCambios() {
+  // Aquí puedes validar y/o guardar los datos a tu backend o localStorage
+  // Por ahora solo deshabilitamos los inputs y ocultamos el botón guardar
+
+  const inputs = document.querySelectorAll('#formPersonal input');
+  inputs.forEach(input => {
+    input.disabled = true;
+  });
+
+  document.getElementById('btnGuardar').classList.add('d-none');
+
+  // Opcional: mostrar mensaje de éxito
+  alert('Cambios guardados correctamente.');
+}
+</script>
+
+<!-- Contenedor de Información Familiar -->
+<script>
+  function habilitarEdicionFamiliar() {
+  const inputs = document.querySelectorAll('#formFamiliar input');
+  inputs.forEach(input => {
+    input.disabled = false;
+  });
+  document.getElementById('btnGuardarFamiliar').classList.remove('d-none');
+}
+
+function guardarCambiosFamiliar() {
+  const inputs = document.querySelectorAll('#formFamiliar input');
+  inputs.forEach(input => {
+    input.disabled = true;
+  });
+  document.getElementById('btnGuardarFamiliar').classList.add('d-none');
+
+  // Opcional: Mensaje de confirmación
+  alert('Información familiar guardada correctamente.');
+}
+</script>
+
+<!-- Contenedor de Información Religiosa -->
+<script>
+  function habilitarEdicionReligiosa() {
+  const inputs = document.querySelectorAll('#formReligiosa input');
+  inputs.forEach(input => {
+    input.disabled = false;
+  });
+  document.getElementById('btnGuardarReligiosa').classList.remove('d-none');
+}
+
+function guardarCambiosReligiosa() {
+  const inputs = document.querySelectorAll('#formReligiosa input');
+  inputs.forEach(input => {
+    input.disabled = true;
+  });
+  document.getElementById('btnGuardarReligiosa').classList.add('d-none');
+
+  // Opcional: Mensaje de confirmación
+  alert('Información religiosa guardada correctamente.');
+}
+</script>
+
+ </body> 
+</html> 
